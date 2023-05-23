@@ -29,6 +29,7 @@ trigger:
     platform: device
     device_id: "{{ sensor_id }}"
     entity_id: !input window_sensor
+    domain: binary_sensor
     for:
       hours: 0
       minutes: 0
@@ -37,6 +38,7 @@ trigger:
     platform: device
     device_id: "{{ sensor_id }}"
     entity_id: !input window_sensor
+    domain: binary_sensor
     for:
       hours: 0
       minutes: 0
@@ -48,6 +50,7 @@ action:
         condition: device
         device_id: "{{ sensor_id }}"
         entity_id: !input window_sensor
+        domain: binary_sensor
     then:
       - service: zha.set_zigbee_cluster_attribute
         data:
@@ -63,6 +66,7 @@ action:
         condition: device
         device_id: "{{ sensor_id }}"
         entity_id: !input window_sensor
+        domain: binary_sensor
     then:
       - service: zha.set_zigbee_cluster_attribute
         data:
