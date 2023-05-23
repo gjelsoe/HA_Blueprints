@@ -3,5 +3,5 @@
 
 | Device | Description | File |
 | -- | -- | -- |
-| Danfoss Ally | Allows you to use an External Windows Sensor | Danfoss/Danfoss_Ally_External_Window_Open_Close.yaml|
+| Danfoss Ally | Allows you to use an External Windows Sensor | Danfoss_Ally/Danfoss_Ally_External_Window_Open_Close.yaml|
 | -- | -- | -- |
