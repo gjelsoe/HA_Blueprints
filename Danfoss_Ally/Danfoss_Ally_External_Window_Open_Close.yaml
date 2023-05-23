@@ -3,6 +3,7 @@ blueprint:
   description: Turn On/Off Heating on Danfoss Ally based on external Window Sensor.
   domain: automation
   input:
+    duration:
     window_sensor:
       name: Window Sensor
       description: This sensor will turn On/Off target eTRV.
