@@ -2,6 +2,7 @@ blueprint:
   name: Danfoss Ally External Window Open/Close
   description: Turn On/Off Heating on Danfoss Ally based on external Window Sensor.
   domain: automation
+  source_url: https://github.com/gjelsoe/HA_Blueprints/blob/main/Danfos_Ally/Danfoss_Ally_External_Window_Open_Close.yaml
   input:
     onoff_wait_delay:
       name: Wait Delay
