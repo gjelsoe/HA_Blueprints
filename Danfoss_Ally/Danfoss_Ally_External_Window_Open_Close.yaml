@@ -19,12 +19,15 @@ blueprint:
             domain: climate
 
 trigger_variables:
+  sensor_device: !input window_sensor
+  sensor_id: "{{ device_id(sensor_device) }}"
   device: !input etrv_target
-  etrv_ieee: "{{(device_attr(device, 'identifiers')|list)[0][1]}}"
+  etrv_ieee: "{{ (device_attr(device, 'identifiers')|list)[0][1] }}"
 
 trigger:
   - type: opened
     platform: device
+    device_id: "{{ sensor_id }}"
     entity_id: !input window_sensor
     for:
       hours: 0
@@ -32,6 +35,7 @@ trigger:
       seconds: 10
   - type: not_opened
     platform: device
+    device_id: "{{ sensor_id }}"
     entity_id: !input window_sensor
     for:
       hours: 0
@@ -42,6 +46,7 @@ action:
   - if:
       - type: is_open
         condition: device
+        device_id: "{{ sensor_id }}"
         entity_id: !input window_sensor
     then:
       - service: zha.set_zigbee_cluster_attribute
@@ -56,6 +61,7 @@ action:
   - if:
       - type: is_not_open
         condition: device
+        device_id: "{{ sensor_id }}"
         entity_id: !input window_sensor
     then:
       - service: zha.set_zigbee_cluster_attribute
