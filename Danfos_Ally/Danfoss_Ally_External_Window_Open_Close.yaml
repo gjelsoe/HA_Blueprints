@@ -16,7 +16,6 @@ blueprint:
       selector:
         entity:
           domain: binary_sensor
-          device_class: opening
     etrv_target:
       name: eTRV
       description: Danfoss Ally eTRV to be controlled.
@@ -27,30 +26,24 @@ blueprint:
             domain: climate
 variables:
   device: !input etrv_target
-  ieee: "{{(device_attr(device, 'identifiers')|list)[0][1]}}"
-  window_device: !input window_sensor
+  ieee: "{{ (device_attr(device, 'identifiers')|list)[0][1] }}"
 
+mode: single
 trigger:
-  - type: opened
-    platform: device
-    device_id: '{{ device_id(window_device) }}'
+  - platform: state
     entity_id: !input window_sensor
-    domain: binary_sensor
+    to: "on"
     for: !input onoff_wait_delay
-  - type: not_opened
-    platform: device
-    device_id: '{{ device_id(window_device) }}'
+  - platform: state
     entity_id: !input window_sensor
-    domain: binary_sensor
+    to: "off"
     for: !input onoff_wait_delay
 condition: []
 action:
   - if:
-      - type: is_open
-        condition: device
-        device_id: '{{ device_id(window_device) }}'
+      - condition: state
         entity_id: !input window_sensor
-        domain: binary_sensor
+        state: "on"
     then:
       - service: zha.set_zigbee_cluster_attribute
         data:
@@ -62,11 +55,9 @@ action:
           value: "1"
           manufacturer: "4678"
   - if:
-      - type: is_not_open
-        condition: device
-        device_id: '{{ device_id(window_device) }}'
+      - condition: state
         entity_id: !input window_sensor
-        domain: binary_sensor
+        state: "off"
     then:
       - service: zha.set_zigbee_cluster_attribute
         data:
@@ -77,4 +68,3 @@ action:
           attribute: 16387
           value: "0"
           manufacturer: "4678"
-mode: single
