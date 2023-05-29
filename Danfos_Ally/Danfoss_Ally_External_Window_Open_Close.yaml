@@ -12,13 +12,13 @@ blueprint:
         duration:
     window_sensor:
       name: Window Sensor
-      description: This sensor will turn On/Off target eTRV.
+      description: Sensor or Group of sensors, that is used to turn On/Off target TRV.
       selector:
         entity:
           domain: binary_sensor
     etrv_target:
       name: eTRV
-      description: Danfoss Ally eTRV to be controlled.
+      description: Danfoss Ally TRV to be controlled by Sensor(s).
       selector:
         device:
           manufacturer: Danfoss
